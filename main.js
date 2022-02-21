@@ -1,11 +1,8 @@
 const puppeteer = require('puppeteer');
 
 (async () => {
-    console.log('hi')
-
     const browser = await puppeteer.launch({
         headless: false,
-        executablePath: './chromium/chrome.exe'
     });
     const page = await browser.newPage();
     await page.goto('https://domeggook.com/ssl/member/mem_loginForm.php');
