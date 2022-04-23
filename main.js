@@ -59,8 +59,17 @@ async function update() {
 
 async function send() {
     if (page5 === undefined) { page5 = await browser.newPage() }
+    page5.on('dialog', async dialog => {
+        await dialog.accept();
+    });
     await page5.setDefaultNavigationTimeout(0);
     await page5.goto('https://domemedb.domeggook.com/index/popup_sender/popup_updateProduct.php?arr=all&b2bStatus=0&status=SUCCESS&fromOversea=0&sf=&sw=&itemNos=&pageLimit=50&b2bStatus=0&template=&sender_date1=&sender_date2=&dateType=7&template=&sstore=0&update=ok&&nmChkVal=0')
+
+    await page5.goto('https://domemedb.domeggook.com/index/popup_sender/popup_updateProduct.php?error=ok&so=0')
+    const text = await page5.$eval('#bigDiv2 > div > div.col-md-12 > table > tbody > tr > td:nth-child(4) > div:nth-child(1)', element => element.textContent)
+    if (text.replace(/ /gi, '') != '0건\n') {
+        await page5.click('#bigDiv2 > div > div.col-md-12 > table > tbody > tr > td:nth-child(4) > div.fr > button')
+    }
     await new Promise(resolve => setTimeout(resolve, parseInt(process.env.INTERVAL) * 1000));
     send()
 }
