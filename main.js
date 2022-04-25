@@ -8,12 +8,12 @@ let browser, page1, page2, page3, page4, page5
 
     await login()
 
-    Promise.all([
-        process.env.ACTION1 === '1' ? soldout() : null,
-        process.env.ACTION2 === '1' ? reinventory() : null,
-        process.env.ACTION3 === '1' ? update() : null,
-        process.env.ACTION4 === '1' ? send() : null
-    ]);
+    while(true){
+        process.env.ACTION1 === '1' ? await soldout() : null
+        process.env.ACTION2 === '1' ? await reinventory() : null
+        process.env.ACTION3 === '1' ? await update() : null
+        process.env.ACTION4 === '1' ? await send() : null
+    }
 
 })();
 
@@ -35,7 +35,6 @@ async function soldout() {
         sendSoldout()
     });
     await new Promise(resolve => setTimeout(resolve, parseInt(process.env.INTERVAL) * 1000));
-    soldout()
 }
 
 async function reinventory() {
@@ -46,7 +45,6 @@ async function reinventory() {
         sendReinventory()
     });
     await new Promise(resolve => setTimeout(resolve, parseInt(process.env.INTERVAL) * 1000));
-    reinventory()
 }
 
 async function update() {
@@ -54,7 +52,6 @@ async function update() {
     await page4.setDefaultNavigationTimeout(0);
     await page4.goto('https://domemedb.domeggook.com/index/popup_sender/popup_updateProduct.php?arr=all&b2bStatus=0&status=PRICE&fromOversea=0&sf=&sw=&itemNos=&pageLimit=50&b2bStatus=0&template=&sender_date1=&sender_date2=&dateType=3&template=&sstore=0&update=ok&&nmChkVal=1')
     await new Promise(resolve => setTimeout(resolve, parseInt(process.env.INTERVAL) * 1000));
-    update()
 }
 
 async function send() {
@@ -71,5 +68,4 @@ async function send() {
         await page5.click('#bigDiv2 > div > div.col-md-12 > table > tbody > tr > td:nth-child(4) > div.fr > button')
     }
     await new Promise(resolve => setTimeout(resolve, parseInt(process.env.INTERVAL) * 1000));
-    send()
 }
