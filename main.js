@@ -55,6 +55,7 @@ async function update() {
         `https://domemedb.domeggook.com/index/popup_sender/popup_updateProduct.php?
          update=ok&arr=priceall&b2bStatus=0&nmChkVal=0`
     );
+    await page4.goto('https://domemedb.domeggook.com/index/popup_sender/popup_updateProduct.php?error=ok&so=0')
     await page4.evaluate('delDataError()');
     setTimeout(() => { update(); }, parseInt(process.env.INTERVAL, 10) * 1000);
 }
@@ -71,6 +72,7 @@ async function send() {
         arr=all&b2bStatus=0&status=SUCCESS&fromOversea=0&sf=&sw=&itemNos=&pageLimit=50&b2bStatus=0&
         template=&sender_date1=&sender_date2=&dateType=7&template=&sstore=0&update=ok&&nmChkVal=0`
     );
+    await page5.goto('https://domemedb.domeggook.com/index/popup_sender/popup_updateProduct.php?error=ok&so=0')
     await page5.evaluate('delDataError()');
     setTimeout(() => { send(); }, parseInt(process.env.INTERVAL, 10) * 1000);
 }
