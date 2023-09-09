@@ -50,7 +50,9 @@ const send = async (page, init) => {
 };
 
 const main = async () => {
-    const browser = await puppeteer.launch({ headless: process.env.HIDE_BROWSER !== '0' });
+    const browser = await puppeteer.launch({
+        headless: process.env.SHOW_BROWSER !== '1' ? 'new' : false,
+    });
 
     await login(await browser.newPage());
     Promise.all([
