@@ -1,7 +1,9 @@
 'use strict';
 
-require('dotenv').config();
+const path = require('path');
 const puppeteer = require('puppeteer');
+
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const login = async (page) => {
     await page.goto('https://domeggook.com/ssl/member/mem_loginForm.php');

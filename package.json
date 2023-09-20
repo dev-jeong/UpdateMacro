@@ -1,11 +1,16 @@
 {
+  "name": "update-macro",
+  "version": "1.0.0",
   "scripts": {
     "start": "node main.js",
     "build": "pkg main.js --out-path build"
   },
+  "pkg": {
+    "assets": [".env"]
+  },
   "dependencies": {
     "dotenv": "^16.0.0",
-    "puppeteer": "^21.1.1"
+    "puppeteer": "^21.2.1"
   },
   "devDependencies": {
     "eslint": "^8.46.0",
